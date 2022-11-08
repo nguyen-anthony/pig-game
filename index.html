@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pig Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <div class="container h-100">
+        <div class="row align-items-center">
+            <div class="col-12 text-center">
+                <h1 class="text-center">Pig Game</h1>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-4 text-right playerCard currentPlayer">
+                <h2>Player 1</h2>
+                <h4>Score</h4>
+                <p class="playerScore">0</p>
+            </div>
+            <div class="col-4 text-center">
+                <h4>Dice Roll Area</h4>
+
+                <p id="rollResult">1</p>
+
+                <h4>Player <span>1</span> Turn Total</h4>
+
+                <p id="turnTotal">0</p>
+                <div>
+                    <button id="rollDie">Roll Die</button>
+                    <button id="holdBtn">Hold</button>
+                </div>
+            </div>
+            <div class="col-4 text-left playerCard">
+                <h2>Player 2</h2>
+                <h4>Score</h4>
+                <p class="playerScore">0</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="scripts/script.js"></script>
+</html>

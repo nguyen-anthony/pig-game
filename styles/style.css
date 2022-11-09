@@ -6,8 +6,25 @@ body,
 html {
     height: 100%;
     width: 100%;
+    background-color: black;
+    color: white;
 }
 
 .currentPlayer>h2 {
     color: green;
+}
+
+#winnerNotification {
+    color: green;
+}
+
+.playerScore {
+    font-weight: bold;
+}
+
+.turnTotal {
+    border: 2px;
+    border-style: solid;
+    padding: 1em;
+    margin: 2em;
 }

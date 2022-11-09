@@ -1,9 +1,16 @@
 let rollResult = document.querySelector('#rollResult');
-let turnTotal = document.querySelector('#turnTotal');
+let turnTotalLabel = document.querySelector('#turnTotal');
 let playerCards = document.querySelectorAll('.playerCard');
-let playerScores = document.querySelectorAll('.playerScore');
+let playerScoreLabels = document.querySelectorAll('.playerScore');
+let currentPlayerName = document.querySelector('#currentPlayerLabel').textContent;
+
+let playerScoreMap = new Map();
+playerScoreMap.set("Player 1", 99);
+playerScoreMap.set("Player 2", 0);
+
 
 let roll = 0;
+let turnTotal = 0;
 
 
 //Roll Die Feature
@@ -24,7 +31,8 @@ function rollDie() {
             resetTurnTotal();
             switchCurrentPlayer();
         } else {
-            turnTotal.textContent = parseInt(turnTotal.textContent) + parseInt(rollResult.textContent);
+            turnTotal += roll;
+            turnTotalLabel.textContent = turnTotal;
         }
     }, 1000);
 }
@@ -33,52 +41,88 @@ function rollDie() {
 //Hold Feature
 document.querySelector("#holdBtn").addEventListener('click', () => {
     addToCurrentPlayerScore();
+    checkWinner();
     resetTurnTotal();
     switchCurrentPlayer();
-    checkWinner()
 })
 
 function addToCurrentPlayerScore() {
     let currentPlayerScore = document.querySelector('.currentPlayer>p');
-    currentPlayerScore.textContent = parseInt(currentPlayerScore.textContent) +  parseInt(turnTotal.textContent);
+    playerScoreMap.set(currentPlayerName, playerScoreMap.get(currentPlayerName) + turnTotal);
+
+    currentPlayerScore.textContent = playerScoreMap.get(currentPlayerName);
 }
 
 //Switch Current Player
 function switchCurrentPlayer() {
     playerCards.forEach((card) => {
-        card.classList.contains('currentPlayer') 
-        ? card.classList.remove('currentPlayer') 
-        : card.classList.add('currentPlayer');
+        if(card.classList.contains('currentPlayer')){
+            card.classList.remove('currentPlayer');
+        } else {
+            card.classList.add('currentPlayer');
+            currentPlayerName = card.children[0].textContent;
+            document.querySelector('#currentPlayerLabel').textContent = currentPlayerName;
+        }
     })
 }
 
 //Reset Roll Result
 function resetTurnTotal() {
-    turnTotal.textContent = 0;
+    turnTotal = 0;
+    turnTotalLabel.textContent = 0;
 }
 
 
 //Check Winner
 function checkWinner() {
-    playerScores.forEach((score) => {
-        if(parseInt(score.textContent) >= 100) {
-            console.log("A player won!");
-            disableButtons();
-        }
-    })
+    if(playerScoreMap.get(currentPlayerName) >= 100){
+        document.querySelector('#winnerNotification').textContent = `${currentPlayerName} won!`;
+        disableButtons(false);
+    }
 }
 
 
 //disable buttons
-function disableButtons() {
-    document.querySelectorAll('button').forEach((button) => {
-        button.disabled = true;
-    });
+function disableButtons(all = true) {
+    if(all) {
+        document.querySelectorAll('button').forEach((button) => {
+            button.disabled = true;
+        });
+    } else {
+        document.querySelectorAll('.gameControl').forEach((button) => {
+            button.disabled = true;
+        });
+    }
 }
 
 //enable buttons
-function enableButtons() {
-    document.querySelectorAll('button').forEach((button) => {
-        button.disabled = false;
-    });
+function enableButtons(all = true) {
+    if(all) {
+        document.querySelectorAll('button').forEach((button) => {
+            button.disabled = false;
+        });
+    } else {
+        document.querySelectorAll('.gameControl').forEach((button) => {
+            button.disabled = false;
+        });
+    }
 }
+
+//Reset Game Feature
+document.querySelector('#resetBtn').addEventListener('click', () => {
+    enableButtons();
+    resetTurnTotal();
+    document.querySelector('#winnerNotification').textContent = "";
+    playerScoreMap.forEach((score) => {
+        score = 0;
+    });
+    playerScoreLabels.forEach((label) => {
+        label.textContent = 0;
+    });
+    if(!playerCards[0].classList.contains('currentPlayer')){
+        playerCards[0].classList.add('currentPlayer');
+        playerCards[1].classList.remove('currentPlayer');
+    }
+    rollResult.textContent = 1;
+    alert("Game reset!");
+})

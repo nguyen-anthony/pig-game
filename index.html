@@ -15,29 +15,32 @@
         <div class="row align-items-center">
             <div class="col-12 text-center">
                 <h1 class="text-center">Pig Game</h1>
+                <p id="winnerNotification"></p>
             </div>
         </div>
         <div class="row align-items-center">
             <div class="col-4 text-right playerCard currentPlayer">
-                <h2>Player 1</h2>
+                <h2 class="player1">Player 1</h2>
                 <h4>Score</h4>
                 <p class="playerScore">0</p>
             </div>
             <div class="col-4 text-center">
-                <h4>Dice Roll Area</h4>
+                <h3>Dice Roll Area</h3>
 
                 <p id="rollResult">1</p>
+                <div class="turnTotal">
+                    <h4><span id="currentPlayerLabel">Player 1</span> Turn Total</h4>
 
-                <h4>Player <span>1</span> Turn Total</h4>
-
-                <p id="turnTotal">0</p>
+                    <p id="turnTotal">0</p>
+                </div>
                 <div>
-                    <button id="rollDie">Roll Die</button>
-                    <button id="holdBtn">Hold</button>
+                    <button class="gameControl" id="rollDie">Roll Die</button>
+                    <button class="gameControl" id="holdBtn">Hold</button>
+                    <button id="resetBtn">Reset Game</button>
                 </div>
             </div>
             <div class="col-4 text-left playerCard">
-                <h2>Player 2</h2>
+                <h2 class="player2">Player 2</h2>
                 <h4>Score</h4>
                 <p class="playerScore">0</p>
             </div>

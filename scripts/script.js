@@ -5,7 +5,7 @@ let playerScoreLabels = document.querySelectorAll('.playerScore');
 let currentPlayerName = document.querySelector('#currentPlayerLabel').textContent;
 
 let playerScoreMap = new Map();
-playerScoreMap.set("Player 1", 99);
+playerScoreMap.set("Player 1", 0);
 playerScoreMap.set("Player 2", 0);
 
 
